@@ -1,5 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick'
+import $ from 'jquery'
+
+$("#header").css({top: 200, left: 200, position:'absolute'});
 
 const Carousel = (
   { elements,

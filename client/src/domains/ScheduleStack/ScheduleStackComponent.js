@@ -85,13 +85,12 @@ class ScheduleStackComponent extends React.Component{
       }
 
       return(
-        <div  key={activeCourseID}
-              style={style.courseStack}>
+        <div  key={activeCourseID}>
 
               {relationship !== relationships[0] ?
                 <Divider /> : null }
           <br />
-          <CourseCarousel   courseIDs={relationship}
+           <CourseCarousel   courseIDs={relationship}
                             activeCourseID={activeCourseID}
                             courses={my.courses}
                             sections={my.sections}
@@ -127,7 +126,7 @@ class ScheduleStackComponent extends React.Component{
     });
 
     return (
-      <div style={style.scheduleStack}>
+      <div >
         {elements}
       </div>
     )

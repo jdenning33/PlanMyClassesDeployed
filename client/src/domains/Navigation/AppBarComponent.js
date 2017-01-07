@@ -5,6 +5,9 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Help from 'material-ui/svg-icons/action/help-outline';
 import Dialog from 'material-ui/Dialog';
+import $ from 'jquery'
+
+
 
 
 const AppBarComponent = ({title, helpText, helpActive, openHelp, closeHelp}) => (

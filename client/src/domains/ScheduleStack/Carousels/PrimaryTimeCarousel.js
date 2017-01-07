@@ -27,7 +27,8 @@ const PrimaryTimeCarousel = ({timesJSON, activeTime, afterChange}) => {
   let elements = sortedTimes.map( (timeJSON, index) => {
 
     let primaryTime = timeJSON.primaryTime;
-    let active = (primaryTime.start === activeTime.start &&
+    let active = (primaryTime.days === activeTime.days &&
+                  primaryTime.start === activeTime.start &&
                   primaryTime.end   === activeTime.end);
 
     let iStyle = active ? style.activeCarouselItem : style.carouselItem;
@@ -46,7 +47,9 @@ const PrimaryTimeCarousel = ({timesJSON, activeTime, afterChange}) => {
       <Carousel elements={elements}
                 initialSlide={
                     sortedTimes.findIndex(time =>
-                      time.primaryTime.start === activeTime.start)
+                      ( time.primaryTime.days === activeTime.days &&
+                        time.primaryTime.start === activeTime.start &&
+                        time.primaryTime.end   === activeTime.end))
                   }
                 afterChange={afterChange} />
     </div>

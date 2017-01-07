@@ -21,8 +21,8 @@ const style = {
     width:'100%',
   },
   window: {
-    height: '95%',
-    width: '95%',
+    height: '98%',
+    width: '98%',
     // minHeight: '100vh',
     // minWidth: '100vw',
     display: 'flex',
@@ -40,7 +40,7 @@ const style = {
     zIndex:'99',
     backgroundColor: '#fff',
     marginLeft: '2px',
-    marginRight: '-15px',
+    marginRight: '-25px',
     marginTop: '-10px',
   },
   chip: {
@@ -76,11 +76,13 @@ const style = {
     overflowX: 'hidden !important',
   },
   footer: {
-    position: 'fixed',
-    bottom: '0',
-    right: '0',
+    position:'fixed',
+    bottom:'0px',
+    left: '0px',
     zIndex: '100',
+    margin: '0 auto',
     width: '100vw',
+    textAlign: 'center',
   },
 
   addCourse: {

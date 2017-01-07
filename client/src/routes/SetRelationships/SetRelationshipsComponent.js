@@ -61,9 +61,6 @@ const SetRelationshipComponent = ( {
     helpActive, courseIDs, stackMap, courses, activeLinks, setRelationship,
               openHelp, closeHelp, toggleSetRelationship, changeRoute} ) => (
 
-  <div style={style.window}>
-    <div style={style.contentHiderLeft} />
-
     <div style={style.appPage}>
         <AppBarComponent  helpActive={helpActive}
                           openHelp={openHelp}
@@ -93,9 +90,6 @@ const SetRelationshipComponent = ( {
       </div>
 
       <br />
-    </div>
-
-    <div style={style.contentHiderRight} />
   </div>
 )
 

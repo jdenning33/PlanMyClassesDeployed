@@ -5,7 +5,7 @@ import { setRoute }     from '../../routes/AppRouter'
 const mapStateToProps = (state, ownProps) => {
 
   return {
-
+    fixed: ownProps.fixed
   }
 }
 

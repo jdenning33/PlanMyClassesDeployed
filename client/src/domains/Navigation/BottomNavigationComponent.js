@@ -15,7 +15,7 @@ const addIcon = <FontIcon className="material-icons">add</FontIcon>;
  * provided. The selected `BottomNavigationItem` is determined by application
  * state (for instance, by the URL).
  */
-const BottomNavigationComponent = ({changeRoute}) => {
+const BottomNavigationComponent = ({fixed=true, changeRoute}) => {
 
   // select = (index) => this.setState({selectedIndex: index});
   let path = window.location.pathname;
@@ -27,7 +27,7 @@ const BottomNavigationComponent = ({changeRoute}) => {
   if(path === '/course-browser') index = 0;
 
   return (
-    <Paper style={style.footer} zDepth={1}>
+    <Paper style={fixed?style.footer:null} zDepth={1}>
       <BottomNavigation selectedIndex={index}>
         <BottomNavigationItem
           label="COURSES"
