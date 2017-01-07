@@ -1,5 +1,6 @@
 import React from 'react';
 import SubjectContainer from './SubjectContainer';
+import { dataCache } from '../../dataHandling/dataCache'
 
 
 class SubjectsComponent extends React.Component{
@@ -10,18 +11,21 @@ class SubjectsComponent extends React.Component{
   render(){
     let my = this.props;
 
-    if(Object.keys(my.subjects).length === my.subjectIDs.length){
-      my.subjectIDs.sort( (id1, id2) => {
-        if(!my.subjects[id1] || !my.subjects[id2]) return 0;
-        else {
-          return my.subjects[id1].code - my.subjects[id2].code;
-        }
+    let filteredIDs;
+    if(dataCache.isDataLoaded(my.subjects, my.subjectIDs)){
+      filteredIDs = my.subjectIDs.sort( (id1, id2) => {
+        let name1 = my.subjects[id1].name;
+        let name2 = my.subjects[id2].name;
+
+        if(name1 == name2) return 0;
+        if(name1 > name2) return 1;
+        return -1;
       });
     }
 
     return(
       <span>
-        {my.subjectIDs.map( (subjectID) => (
+        {filteredIDs.map( (subjectID) => (
             <span key={subjectID}>
               <SubjectContainer  subjectID={subjectID} />
             </span>

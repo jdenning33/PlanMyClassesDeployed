@@ -20,29 +20,6 @@ const style = {
     margin: '0 auto',
     width:'100%',
   },
-  window: {
-    height: '98%',
-    width: '98%',
-    // minHeight: '100vh',
-    // minWidth: '100vw',
-    display: 'flex',
-  },
-  contentHiderLeft: {
-    flex:'1 1',
-    zIndex:'99',
-    backgroundColor: '#fff',
-    marginRight: '2px',
-    marginLeft: '-15px',
-    marginTop: '-10px',
-  },
-  contentHiderRight : {
-    flex:'1 1',
-    zIndex:'99',
-    backgroundColor: '#fff',
-    marginLeft: '2px',
-    marginRight: '-25px',
-    marginTop: '-10px',
-  },
   chip: {
     margin: '0 4px',
   },
@@ -66,7 +43,7 @@ const style = {
   appPage:{
     margin: '0 auto',
     marginTop: '70px',
-    marginBottom: '80px',
+    marginBottom: '0px',
     padding: '0px',
     width: '100%',
     minWidth: '300px',
