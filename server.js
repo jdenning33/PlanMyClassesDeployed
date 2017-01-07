@@ -1,70 +1,55 @@
-const express = require('express');
-const fs = require('fs');
-const sqlite = require('sql.js');
+//first we import our dependencies...
+var express = require('express');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var dataAPIrouter = require('./dataAPIrouter');
+var DB_LINK = 'mongodb://jdenning33:qBert002@ds145138.mlab.com:45138/planmyclasses';
 
-const filebuffer = fs.readFileSync('db/usda-nnd.sqlite3');
+//and create our instances
+var app = express();
+var router = express.Router();
 
-const db = new sqlite.Database(filebuffer);
-
-const app = express();
-
-app.set('port', (process.env.PORT || 3001));
+//set our port to either a predetermined port number if you have set it up, or 3001
+var port = process.env.API_PORT || 3001;
+app.set('port', (port));
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
-const COLUMNS = [
-  'carbohydrate_g',
-  'protein_g',
-  'fa_sat_g',
-  'fa_mono_g',
-  'fa_poly_g',
-  'kcal',
-  'description',
-];
-app.get('/api/food', (req, res) => {
-  const param = req.query.q;
+//db config
+mongoose.Promise = global.Promise;
+mongoose.connect(DB_LINK);
 
-  if (!param) {
-    res.json({
-      error: 'Missing required parameter `q`',
-    });
-    return;
-  }
+//now we should configure the API to use bodyParser and look for JSON data in the request body
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-  // WARNING: Not for production use! The following statement
-  // is not protected against SQL injections.
-  const r = db.exec(`
-    select ${COLUMNS.join(', ')} from entries
-    where description like '%${param}%'
-    limit 100
-  `);
+//To prevent errors from Cross Origin Resource Sharing, we will set our headers to allow CORS with middleware like so:
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
 
-  if (r[0]) {
-    res.json(
-      r[0].values.map((entry) => {
-        const e = {};
-        COLUMNS.forEach((c, idx) => {
-          // combine fat columns
-          if (c.match(/^fa_/)) {
-            e.fat_g = e.fat_g || 0.0;
-            e.fat_g = (
-              parseFloat(e.fat_g, 10) + parseFloat(entry[idx], 10)
-            ).toFixed(2);
-          } else {
-            e[c] = entry[idx];
-          }
-        });
-        return e;
-      })
-    );
-  } else {
-    res.json([]);
-  }
+  //and remove cacheing so we get the most recent comments
+  res.setHeader('Cache-Control', 'no-cache');
+  next();
 });
 
-app.listen(app.get('port'), () => {
-  console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
+//now  we can set the route path & initialize the API
+router.get('/', function(req, res) {
+  res.json({ message: 'API Initialized!'});
+});
+
+
+dataAPIrouter.addToRouter(router);
+
+//Use our router configuration when we call /api
+app.use('/api', router);
+
+//starts the server and listens for requests
+app.listen(port, function() {
+  console.log(`api running on port ${port}`);
 });
