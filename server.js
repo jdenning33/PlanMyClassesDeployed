@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const sqlite = require('sql.js');
 const filebuffer = fs.readFileSync('db/usda-nnd.sqlite3');
+var bodyParser = require('body-parser');
+var dataAPIrouter = require('./dataAPIrouter');
 
 const DB_LINK = 'mongodb://heroku_rp2hk3f2:i5kqtfdb4quirgi5bh0maletp4@ds157298.mlab.com:57298/heroku_rp2hk3f2';
 
