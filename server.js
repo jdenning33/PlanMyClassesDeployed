@@ -5,9 +5,22 @@ const filebuffer = fs.readFileSync('db/usda-nnd.sqlite3');
 
 const DB_LINK = 'mongodb://heroku_rp2hk3f2:i5kqtfdb4quirgi5bh0maletp4@ds157298.mlab.com:57298/heroku_rp2hk3f2';
 
-//db config
-mongoose.Promise = global.Promise;
-mongoose.connect(DB_LINK);
+// Here we find an appropriate database to connect to, defaulting to
+// localhost if we don't find one.
+var uristring =
+  process.env.MONGODB_URI ||
+  DB_LINK;
+
+// Makes connection asynchronously.  Mongoose will queue up database
+// operations and release them when the connection is complete.
+mongoose.connect(uristring, function (err, res) {
+  if (err) { 
+    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+    console.log ('Succeeded connected to: ' + uristring);
+  }
+});
+
 
 const app = express();
 
