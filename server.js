@@ -1,43 +1,70 @@
-//first we import our dependencies...
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var dataAPIrouter = require('./dataAPIrouter');
-var DB_LINK = 'mongodb://jdenning33:qBert002@ds145138.mlab.com:45138/planmyclasses';
+const express = require('express');
+const fs = require('fs');
+const sqlite = require('sql.js');
 
-//and create our instances
-var app = express();
-var router = express.Router();
+const filebuffer = fs.readFileSync('db/usda-nnd.sqlite3');
 
-//set our port to either a predetermined port number if you have set it up, or 3001
-app.set('port', (process.env.API_PORT || 3001));
+const db = new sqlite.Database(filebuffer);
+
+const app = express();
+
+app.set('port', (process.env.PORT || 3001));
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
-//db config
-// mongoose.Promise = global.Promise;
-// mongoose.connect(DB_LINK);
+const COLUMNS = [
+  'carbohydrate_g',
+  'protein_g',
+  'fa_sat_g',
+  'fa_mono_g',
+  'fa_poly_g',
+  'kcal',
+  'description',
+];
+app.get('/api/food', (req, res) => {
+  const param = req.query.q;
 
-//now we should configure the API to use bodyParser and look for JSON data in the request body
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+  if (!param) {
+    res.json({
+      error: 'Missing required parameter `q`',
+    });
+    return;
+  }
 
+  // WARNING: Not for production use! The following statement
+  // is not protected against SQL injections.
+  const r = db.exec(`
+    select ${COLUMNS.join(', ')} from entries
+    where description like '%${param}%'
+    limit 100
+  `);
 
-//now  we can set the route path & initialize the API
-// router.get('/', function(req, res) {
-//   res.json({ message: 'API Initialized!'});
-// });
+  if (r[0]) {
+    res.json(
+      r[0].values.map((entry) => {
+        const e = {};
+        COLUMNS.forEach((c, idx) => {
+          // combine fat columns
+          if (c.match(/^fa_/)) {
+            e.fat_g = e.fat_g || 0.0;
+            e.fat_g = (
+              parseFloat(e.fat_g, 10) + parseFloat(entry[idx], 10)
+            ).toFixed(2);
+          } else {
+            e[c] = entry[idx];
+          }
+        });
+        return e;
+      })
+    );
+  } else {
+    res.json([]);
+  }
+});
 
-
-// dataAPIrouter.addToRouter(router);
-
-//Use our router configuration when we call /api
-// app.use('/api', router);
-
-//starts the server and listens for requests
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
