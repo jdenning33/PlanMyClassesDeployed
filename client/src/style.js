@@ -21,8 +21,8 @@ const style = {
     width:'100%',
   },
   window: {
-    height: '100%',
-    width: '100%',
+    height: '95%',
+    width: '95%',
     // minHeight: '100vh',
     // minWidth: '100vw',
     display: 'flex',
