@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const fs = require('fs');
 const sqlite = require('sql.js');
 const filebuffer = fs.readFileSync('db/usda-nnd.sqlite3');
@@ -14,7 +15,7 @@ var uristring =
 // Makes connection asynchronously.  Mongoose will queue up database
 // operations and release them when the connection is complete.
 mongoose.connect(uristring, function (err, res) {
-  if (err) { 
+  if (err) {
     console.log ('ERROR connecting to: ' + uristring + '. ' + err);
   } else {
     console.log ('Succeeded connected to: ' + uristring);
