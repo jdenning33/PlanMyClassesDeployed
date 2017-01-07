@@ -13,34 +13,13 @@ const initialState = {
   // each id is in an array. If there is an or relationship between two
   //  courses, then they are in the same array
   desiredMap:
-  {   relationships:  [ [  '586477d6c5d24f47c82d219b',
-                           '586477cec5d24f47c82d2104'
-                        ],
-                        [  '586477cfc5d24f47c82d210d'
-                        ]
-                      ],
+  {   relationships:  [ ],
 
 //active courses contains an array of each currently selected course
 // this means one item from each of the relationship arrays
-      activeCourseIDs: [ '586477d6c5d24f47c82d219b',
-                         '586477cfc5d24f47c82d210d',
-                     ],
+      activeCourseIDs: [ ],
 
-      data:          {  '586477d6c5d24f47c82d219b':   //course
-                            { activeSectionID:  '58647835c5d24f47c82d29c7',
-                              removedSections: [],
-                            },
-
-                        '586477cec5d24f47c82d2104':
-                            { activeSectionID:  '586477e6c5d24f47c82d2293',
-                              removedSections: [],
-                            },
-
-                        '586477cfc5d24f47c82d210d':
-                            { activeSectionID:  '586477eec5d24f47c82d23c1',
-                              removedSections: [],
-                            },
-                    }
+      data:          { }
   },
 
   // Any cards that have been clicked and should be showing more info
