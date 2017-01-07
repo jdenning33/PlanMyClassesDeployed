@@ -121,10 +121,8 @@ const handleSubjects = ( campus ) => {
 
   $(campus).find('subject')
   .filter( (index, subject) => {
-    return (  $(subject).attr('code') === 'ECE'   ||
-              $(subject).attr('code') === 'MATH'   ||
-              $(subject).attr('code') === 'CS'
-            );
+    return (  $(subject).attr('code') >= 'T' &&
+              $(subject).attr('code') < 'Z' );
   })
   .each( (index, subject) => {
     let courses = handleCourses( subject );
