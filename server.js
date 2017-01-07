@@ -6,6 +6,15 @@ const filebuffer = fs.readFileSync('db/usda-nnd.sqlite3');
 
 const DB_LINK = 'mongodb://heroku_rp2hk3f2:i5kqtfdb4quirgi5bh0maletp4@ds157298.mlab.com:57298/heroku_rp2hk3f2';
 
+const app = express();
+
+app.set('port', (process.env.PORT || 3001));
+
+// Express only serves static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.
 var uristring =
@@ -39,15 +48,6 @@ app.use(function(req, res, next) {
 });
 //new
 
-
-const app = express();
-
-app.set('port', (process.env.PORT || 3001));
-
-// Express only serves static assets in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
 
 // const COLUMNS = [
 //   'carbohydrate_g',
