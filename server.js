@@ -53,6 +53,7 @@ var router = express.Router();
 router.get('/', function(req, res) {
   res.json({ message: 'API Initialized!'});
 });
+dataAPIrouter.addToRouter(router);
 //Use our router configuration when we call /api
 app.use('/api', router);
 
