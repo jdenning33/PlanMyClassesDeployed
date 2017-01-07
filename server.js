@@ -1,10 +1,13 @@
 const express = require('express');
 const fs = require('fs');
 const sqlite = require('sql.js');
-
 const filebuffer = fs.readFileSync('db/usda-nnd.sqlite3');
 
-const db = new sqlite.Database(filebuffer);
+const DB_LINK = 'mongodb://heroku_rp2hk3f2:i5kqtfdb4quirgi5bh0maletp4@ds157298.mlab.com:57298/heroku_rp2hk3f2';
+
+//db config
+mongoose.Promise = global.Promise;
+mongoose.connect(DB_LINK);
 
 const app = express();
 
