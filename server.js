@@ -47,7 +47,7 @@ router.get('/', function(req, res) {
 dataAPIrouter.addToRouter(router);
 
 //Use our router configuration when we call /api
-app.use('/api', router);
+// app.use('/api', router);
 
 //starts the server and listens for requests
 app.listen(port, function() {
