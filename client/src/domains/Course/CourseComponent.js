@@ -19,7 +19,8 @@ const toggleIcon = (isDesired, toggleDesiredCourse, course) => {
 const CourseCard = ( {course, courseID, isDesired, toggleDesiredCourse,
                           expanded, cardClicked} ) => (
 
-  <Card expanded={expanded} onExpandChange={()=>cardClicked(courseID)}>
+  <Card expanded={expanded}
+    onExpandChange={()=>cardClicked(courseID)}>
     <CardHeader
       title={course.title}
       subtitle={course.number}

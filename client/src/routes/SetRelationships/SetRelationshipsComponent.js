@@ -47,7 +47,7 @@ let DesiredCoursesCard = ({courseIDs, courses, stackMap, setRelationship,
     </CardText>
     <CardActions expandable={true}>
       <FlatButton label={!setRelationship?
-          "New Relationship " : "Save Relationship"}
+          "Set a Relationship" : "Save Relationship"}
           primary={setRelationship}
           secondary={!setRelationship}
         onTouchTap={() => toggleSetRelationship()} />
@@ -66,7 +66,7 @@ const SetRelationshipComponent = ( {
                           openHelp={openHelp}
                           closeHelp={closeHelp}
                           title={'Set Relationships'}
-                          helpText={'How to use the schedule builder:'}/>
+                          helpText={'Set Relationships - a relationship signifies that you will take one or the other of these courses. For example, if I had to take CS 151 or ECE 131 I would create a relationship with them. To make a relationship click the "Set a Relationship" button at the bottom of the card, then click the "link" icon of any classes you want in the relationship, when you are done click "save relationship" and move on to the schedule builder'}/>
       <br />
         {/* <span style={{width:'100%', maxWidth:'500px', position:'fixed', top:'150px'}}>
           <RaisedButton style={

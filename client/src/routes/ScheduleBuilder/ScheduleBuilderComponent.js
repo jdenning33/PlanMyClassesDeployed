@@ -40,7 +40,7 @@ const ScheduleBuilderComponent = ( {
                       openHelp={openHelp}
                       closeHelp={closeHelp}
                       title={'Schedule Builder'}
-                      helpText={'How to use the schedule builder:'}/>
+                      helpText={'The Schedule Stack - congrats you made it to the schedule builder. Each slider below represents the options you have for a given course offering. Slide items to the left or to the right to mix and match your schedule! When you are done, you can simply write down your CRNs at the top of the page and provide them to the UNM "Register for Classes" site.'}/>
     <br />
     <div>
     <ScheduleStackCard stackMap={stackMap}

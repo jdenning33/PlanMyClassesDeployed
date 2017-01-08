@@ -36,7 +36,9 @@ let SchedulePreferencesCard = ({activeLinks} ) => (
 
 let SearchBar = ({ currentFilter, updateFilter }) => (
   <Paper zDepth={2} style={style.searchBarContainer}>
-    <TextField  hintText="filter results"
+    <TextField  hintText="search subjects"
+                hintStyle={{marginLeft: '35%'}}
+                inputStyle={{textAlign:'center'}}
                 onChange={ e => updateFilter(e.target.value) }
                 value={currentFilter}
                 // floatingLabelText="MultiLine and FloatingLabel"
@@ -60,13 +62,14 @@ class CourseBrowserComponent extends React.Component{
 
   render(){
     let my=this.props;
+    if(!my.subjectIDs.length) return <div>loading</div>
     return (
       <div style={style.appPage}>
         <AppBarComponent helpActive={my.helpActive}
                         openHelp={my.openHelp}
                         closeHelp={my.closeHelp}
                         title={'Course Browser'}
-                        helpText={'How to use the course browser:'}/>
+                        helpText={'The Course Browser - first select which semester and campusi you are interested in, then you can click a subject to view the course offerings for your selection. Subjects may be searched with the filter bar at the bottom. Courses can then be added to your schedule builder by clicking the + or you can click the title and view more info.'}/>
         <br />
         <div>
           <SchedulePreferencesCard activeLinks={my.activeLinks} />

@@ -24,7 +24,7 @@ export const ROUTE_ENUM = {
 
 export const routes = (
   <Route path={ROUTE_ENUM.HOME}>
-    <IndexRoute component={home} />
+    <IndexRoute component={schedule} />
     <Route path={ROUTE_ENUM.SCHEDULE_BUILDER} component={schedule} />
     <Route path={ROUTE_ENUM.COURSE_BROWSER} component={browser} />
     <Route path={ROUTE_ENUM.SET_RELATIONSHIPS} component={relationships} />

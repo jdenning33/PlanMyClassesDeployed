@@ -17,6 +17,7 @@ const style = {
     width: '100vw',
   },
   searchBar: {
+    textAlign: 'center',
     margin: '0 auto',
     width:'100%',
   },
@@ -155,10 +156,10 @@ const style = {
     padding: '50px',
     backgroundColor:'#dddddd'
   },
-  courseBrowserCard: {
-    paddingTop: '1px',
-    paddingRight: '1px',
-  },
+  // courseBrowserCard: {
+  //   paddingTop: '1px',
+  //   paddingRight: '1px',
+  // },
   sectionCardTime: {
     float: 'right',
   },
