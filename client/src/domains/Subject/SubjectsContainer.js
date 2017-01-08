@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
   });
 
   return {
-    subjects: mySubjects,
+    subjects: subjects,
     subjectIDs: subjectIDs,
   }
 }

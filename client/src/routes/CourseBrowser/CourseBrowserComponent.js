@@ -62,7 +62,6 @@ class CourseBrowserComponent extends React.Component{
 
   render(){
     let my=this.props;
-    if(!my.subjectIDs.length) return <div>loading</div>
     return (
       <div style={style.appPage}>
         <AppBarComponent helpActive={my.helpActive}

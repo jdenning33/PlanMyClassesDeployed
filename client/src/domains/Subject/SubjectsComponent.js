@@ -17,10 +17,16 @@ class SubjectsComponent extends React.Component{
         let name1 = my.subjects[id1].name;
         let name2 = my.subjects[id2].name;
 
-        if(name1 == name2) return 0;
+        if(name1 === name2) return 0;
         if(name1 > name2) return 1;
         return -1;
       });
+    } else {
+      return <div>loading</div>
+    }
+
+    if(!filteredIDs.length){
+      return <div style={{textAlign:'center'}}>no subjects match</div>
     }
 
     return(
