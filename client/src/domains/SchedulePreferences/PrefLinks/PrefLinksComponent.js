@@ -18,7 +18,6 @@ const PrefLinksComponent = ( { ENUM, activeLinks, action } ) => {
       preferences.push(ENUM[preference]);
     }
   };
-  console.log(activeLinks);
 
   return (
     <span>

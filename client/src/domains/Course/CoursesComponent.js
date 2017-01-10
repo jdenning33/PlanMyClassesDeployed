@@ -33,22 +33,33 @@ const stripAndParse = (str) => {
 class CoursesComponent extends React.Component{
   constructor( {courses, courseIDs, setRelationship = false,
                   stagedRelationship,
-                  breakFromRelationship, stageNewRelationship} ){
+                  breakFromRelationship, stageNewRelationship, loadCourses} ){
     super();
+  }
+
+  componentWillMount(){
+    let my = this.props;
+    my.loadCourses(my.courseIDs);
   }
 
   render(){
     let my = this.props;
+    let ready = false;
 
     if(Object.keys(my.courses).length === my.courseIDs.length){
-      my.courseIDs.sort( (id1, id2) => {
-        if(!my.courses[id1] || !my.courses[id2]) return 0;
-        else {
-          return stripAndParse(my.courses[id1].number) -
-                  stripAndParse(my.courses[id2].number);
-        }
-      });
+      ready = true;
     }
+
+    if(!ready) return <div style={{textAlign:'center'}}>loading</div>
+
+    my.courseIDs.sort( (id1, id2) => {
+      if(!my.courses[id1] && !my.courses[id2]) return 0;
+      if(!my.courses[id1] &&  my.courses[id2]) return 1;
+      if(my.courses[id1]  && !my.courses[id2]) return -1;
+
+      return stripAndParse(my.courses[id1].number) -
+              stripAndParse(my.courses[id2].number);
+    });
 
     if(my.setRelationship){
       return(
@@ -59,8 +70,8 @@ class CoursesComponent extends React.Component{
             let staged = my.stagedRelationship.some(id => id===courseID);
             return(
               // (courseID === my.courseIDs[0]) ? null :
-                <span>
-                  <CourseContainer courseID={courseID} />
+                <span key={courseID}>
+                  <CourseContainer courseID={courseID} ready={ready} />
                   <span style={style.orIcon}>
                     <OrIcon staged={staged}
                       onTouchTap={()=>my.stageNewRelationship(my.courseIDs)} />
@@ -80,12 +91,15 @@ class CoursesComponent extends React.Component{
 
     return(
       <span>
-        {my.courseIDs.map( (courseID) => (
+        {my.courseIDs.map( (courseID) => {
+          if(!my.courses[courseID]) return <div key={courseID}>loading</div>
+
+          return (
             <span key={courseID}>
-              <CourseContainer  courseID={courseID}  />
+              <CourseContainer  courseID={courseID} ready={ready} />
             </span>
           )
-        )}
+        })}
       </span>
     )
   }

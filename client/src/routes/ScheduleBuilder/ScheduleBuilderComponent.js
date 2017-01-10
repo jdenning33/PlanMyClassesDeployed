@@ -20,7 +20,8 @@ let ScheduleStackCard = ({stackMap, activeCRNs, courseIDs}) => (
     <CardText style={style.wrapper} expandable={false}>
       CRNs:
         {activeCRNs.map((crn) =>
-          <Chip labelStyle={style.chipLabel}
+          <Chip key={crn}
+                labelStyle={style.chipLabel}
                 style={style.chip}>{crn}</Chip>)}
     </CardText>
     </CardHeader>

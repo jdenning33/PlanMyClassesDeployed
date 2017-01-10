@@ -28,6 +28,7 @@ const mapStateToProps = (state, ownProps) => {
     courseID: ownProps.courseID,
     isDesired: isDesired,
     expanded: expanded,
+    ready: ownProps.ready,
     fetchingIDs: state.dataCacheReducer.fetchingIDs,
   }
 }

@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import CoursesComponent from './CoursesComponent'
 import { scheduleBuilder } from '../../routes/ScheduleBuilder/scheduleBuilderDuck'
+import { COLLECTIONS_ENUM } from '../../dataHandling/dataCache'
+import { dataCache } from '../../dataHandling/dataCache'
 
 //Just requires an array of courseIDs
 const mapStateToProps = (state, ownProps) => {
@@ -32,6 +34,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     breakFromRelationship: (courseID) => {
       dispatch(scheduleBuilder.breakFromRelationship(courseID))
+    },
+    loadCourses: (courseIDs) => {
+      dispatch(dataCache.fetchIfNeeded({
+        type: COLLECTIONS_ENUM.COURSES,
+        originator: 'coursesContainer',
+        dataIDs: courseIDs
+      }) )
     }
   }
 }

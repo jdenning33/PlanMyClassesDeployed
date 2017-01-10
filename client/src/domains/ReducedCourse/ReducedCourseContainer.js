@@ -41,7 +41,6 @@ const mapDispatchToProps = (dispatch) => {
     },
 
     setActive: (e) => {
-      console.log(e);
       return;
     },
   }

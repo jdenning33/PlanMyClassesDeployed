@@ -1,5 +1,22 @@
 //style.js
 const style = {
+  addButtonContainer: {
+    display: 'inline-block',
+    border: '10px',
+    margin: 'auto',
+    padding: '0px',
+    position: 'absolute',
+    overflow: 'visible',
+    width: '48px',
+    height: '48px',
+    top: '0px',
+    bottom: '0px',
+    right: '4px',
+    background: 'none'
+  },
+  addButton: {
+
+  },
   orIcon: {
     float:'right',
     // height:'35px',
@@ -44,13 +61,12 @@ const style = {
   appPage:{
     margin: '0 auto',
     marginTop: '70px',
-    marginBottom: '0px',
-    padding: '0px',
+    marginBottom: '100px',
+    padding: '1px',
     width: '100%',
     minWidth: '300px',
     maxWidth: '500px',
 
-    minHeight: '100vh',
     overflowX: 'hidden !important',
   },
   footer: {
@@ -77,12 +93,12 @@ const style = {
 
 
 
-  courseCarouselPaper: {
+  sectionCarouselPaper: {
     padding: '2px',
     textAlign: 'center',
     backgroundColor:'#F8BBD0',
   },
-  courseActiveCarouselPaper: {
+  sectionActiveCarouselPaper: {
     padding: '7px',
     textAlign: 'center',
     backgroundColor:'#4DD0E1',
@@ -97,12 +113,12 @@ const style = {
     textAlign: 'center',
     backgroundColor:'#80DEEA',
   },
-  sectionCarouselPaper: {
+  courseCarouselPaper: {
     padding: '2px',
     textAlign: 'center',
     backgroundColor:'#FCE4EC',
   },
-  sectionActiveCarouselPaper: {
+  courseActiveCarouselPaper: {
     padding: '7px',
     textAlign: 'center',
     backgroundColor:'#80DEEA',
@@ -120,18 +136,14 @@ const style = {
     margin: '0px 3px',
     textAlign:'center',
   },
-  carouselCard:{
-    backgroundColor:'#4DD0E1',
-  },
-  activeCarouselCard:{
-    backgroundColor:'#F06292',
-  },
   courseCarousel: {
     margin: '0 auto',
+    width: '70%',
     padding: '0px',
   },
   primaryTimeCarousel: {
     margin: '0 auto',
+    width: '70%',
     padding: '0px',
   },
   sectionCarousel: {

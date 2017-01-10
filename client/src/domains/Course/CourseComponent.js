@@ -5,19 +5,34 @@ import style from '../../style'
 
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton'
 import AddCircle from 'material-ui/svg-icons/content/add-circle-outline';
 import RemoveCircle from 'material-ui/svg-icons/content/remove-circle-outline';
 
-const toggleIcon = (isDesired, toggleDesiredCourse, course) => {
-  if(!isDesired){
-    return <AddCircle  onTouchTap={() => toggleDesiredCourse(course)}/>
-  } else {
-    return <RemoveCircle onTouchTap={() => toggleDesiredCourse(course)}/>
-  }
-}
+
+
+const toggleIcon = (ready, isDesired, toggleDesiredCourse, course, courseID, cardClicked) => (
+  <span style={style.addButtonContainer}>
+    {!isDesired ?
+      <AddCircle  color={ ready ? '#111' : '#777' }
+                  style={{margin:'12px'}}
+                  onTouchTap={() => {
+                    cardClicked(courseID);
+                    toggleDesiredCourse(course)
+                  }}/>
+      :
+      <RemoveCircle   color={ ready ? '#111' : '#777' }
+                      style={{margin:'12px'}}
+                      onTouchTap={() => {
+                        cardClicked(courseID);
+                        toggleDesiredCourse(course)
+                      }}/>
+    }
+  </span>
+)
 
 const CourseCard = ( {course, courseID, isDesired, toggleDesiredCourse,
-                          expanded, cardClicked} ) => (
+                          ready=true, expanded, cardClicked} ) => (
 
   <Card expanded={expanded}
     onExpandChange={()=>cardClicked(courseID)}>
@@ -25,9 +40,11 @@ const CourseCard = ( {course, courseID, isDesired, toggleDesiredCourse,
       title={course.title}
       subtitle={course.number}
       actAsExpander={true}
-      showExpandableButton={true}
-      openIcon={toggleIcon(isDesired, toggleDesiredCourse, course)}
-      closeIcon={toggleIcon(isDesired, toggleDesiredCourse, course)}
+      style={{flex:'1'}}
+      // showExpandableButton={true}
+      children={toggleIcon(ready, isDesired, toggleDesiredCourse, course, courseID, cardClicked)}
+      // openIcon ={toggleIcon(ready, isDesired, toggleDesiredCourse, course, courseID, cardClicked)}
+      // closeIcon={toggleIcon(ready, isDesired, toggleDesiredCourse, course, courseID, cardClicked)}
     />
     <CardText style={style.courseBrowserCard} expandable={true}>
       {course.description}

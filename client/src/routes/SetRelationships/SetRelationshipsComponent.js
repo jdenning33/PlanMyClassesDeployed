@@ -12,13 +12,24 @@ import FlatButton from 'material-ui/RaisedButton';
 import Chip from 'material-ui/Chip';
 
 
+let SetButton = (setRelationship, toggleSetRelationship) => (
+    <FlatButton label={!setRelationship?
+          "Set a Relationship" : "Save Relationship"}
+          style={{float:'right'}}
+          primary={setRelationship}
+          secondary={!setRelationship}
+        onTouchTap={() => toggleSetRelationship()} />
+    )
+
+
 let DesiredCoursesCard = ({courseIDs, courses, stackMap, setRelationship,
                                   toggleSetRelationship, changeRoute}) => (
   <Card initiallyExpanded={true}>
     <CardHeader
-      title={'Desired Courses'}
-      actAsExpander={true}
-      showExpandableButton={true}
+      // title={'Desired Courses'}
+      // actAsExpander={true}
+      // showExpandableButton={true}
+      children={SetButton(setRelationship, toggleSetRelationship)}
     />
 
    <CardText style={style.wrapper} expandable={false}>
@@ -51,8 +62,6 @@ let DesiredCoursesCard = ({courseIDs, courses, stackMap, setRelationship,
           primary={setRelationship}
           secondary={!setRelationship}
         onTouchTap={() => toggleSetRelationship()} />
-      <FlatButton label="Add Courses"
-        secondary={false} onTouchTap={() => changeRoute(ROUTE_ENUM.COURSE_BROWSER)} />
     </CardActions>
   </Card>
 );
