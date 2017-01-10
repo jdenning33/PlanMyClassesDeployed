@@ -32,8 +32,10 @@ const mapDispatchToProps = (dispatch) => {
                                           dataIDs: [dataID] }
                                         ) );
     },
-    cardClicked: (dataID) => {
-      dispatch( courseBrowser.cardClicked(dataID) );
+    cardClicked: (dataID, expanded) => {
+      !expanded?
+        dispatch( courseBrowser.expandCard(dataID) ):
+        dispatch( courseBrowser.collapseCard(dataID));
     }
   }
 }

@@ -39,6 +39,7 @@ const SectionCarousel = ({sectionJSONs, activeSectionID, sections,
                           afterChange}) => {
 
   let sectionIDs = Object.keys(sectionJSONs);
+  if(sectionIDs ? null: sectionIDs.push(activeSectionID));
 
   let elements =
   sectionIDs.map( (sectionID, index) => {

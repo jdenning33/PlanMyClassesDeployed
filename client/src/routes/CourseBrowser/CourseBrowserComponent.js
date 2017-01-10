@@ -22,8 +22,9 @@ let SchedulePreferencesCard = ({activeLinks} ) => (
     />
 
   <CardText style={style.wrapper} expandable={false}>
-      {activeLinks.map((link) =>
-        <Chip labelStyle={style.chipLabel}
+      {activeLinks.map((link, index) =>
+        <Chip key={index}
+              labelStyle={style.chipLabel}
               style={style.chip}>{link.name}</Chip>)}
     </CardText>
 
@@ -36,23 +37,23 @@ let SchedulePreferencesCard = ({activeLinks} ) => (
 
 let SearchBar = ({ currentFilter, updateFilter }) => (
   <Paper zDepth={2} style={style.searchBarContainer}>
-    <TextField  hintText="search subjects"
-                hintStyle={{marginLeft: '35%'}}
-                inputStyle={{textAlign:'center'}}
-                onChange={ e => updateFilter(e.target.value) }
-                value={currentFilter}
-                // floatingLabelText="MultiLine and FloatingLabel"
-                style={style.SearchBar}
-                fullWidth={true}
-                underlineShow={false} />
+    <form onSubmit={(e) =>  {e.preventDefault(); document.activeElement.blur();}}>
+      <TextField  hintText="search subjects"
+                  hintStyle={{marginLeft: '35%'}}
+                  inputStyle={{textAlign:'center'}}
+                  onChange={ e => updateFilter(e.target.value) }
+                  value={currentFilter}
+                  style={style.searchBar}
+                  fullWidth={true}
+                  underlineShow={false} />
+    </form>
   </Paper>
-
 )
 
 class CourseBrowserComponent extends React.Component{
   constructor( {subjectIDs, helpActive, currentFilter, activeLinks,
                   openHelp, closeHelp, loadSubjects, updateFilter} ){
-    super();;
+    super();
   }
 
   componentWillMount(){

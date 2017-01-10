@@ -8,12 +8,12 @@ import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 const SubjectCard = ( {subject, subjectID, expanded, cardClicked} ) => (
   <Card style={expanded ? {backgroundColor:'#E0F7FA'} : null}
-        expanded={expanded} onExpandChange={() => cardClicked(subjectID)}>
+        expanded={expanded} onExpandChange={() => cardClicked(subjectID, expanded)}>
     <CardHeader
       title={subject.name}
       subtitle={subject.code}
       actAsExpander={true}
-      // showExpandableButton={true}
+      showExpandableButton={true}
     />
   <CardText style={style.courseBrowserCard} expandable={true}>
       <CoursesContainer courseIDs={subject.courseIDs} />

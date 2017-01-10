@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import HomeContainer from './Home/HomeContainer'
+// import HomeContainer from './Home/HomeContainer'
 import ScheduleBuilderContainer from './ScheduleBuilder/ScheduleBuilderContainer'
 import CourseBrowserContainer from './CourseBrowser/CourseBrowserContainer'
 import SetRelationshipsContainer from './SetRelationships/SetRelationshipsContainer'
@@ -8,7 +8,7 @@ import PageNotFoundComponent from './PageNotFound/PageNotFoundComponent'
 
 
 //  Render Components
-const home = () => <HomeContainer />
+// const home = () => <HomeContainer />
 const schedule = () => <ScheduleBuilderContainer />
 const browser = () => <CourseBrowserContainer />
 const relationships = () => <SetRelationshipsContainer />

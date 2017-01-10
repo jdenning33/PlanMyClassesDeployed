@@ -11,6 +11,8 @@ const initialState = {
 
 //  ACTIONS
 const CARD_CLICKED = 'courseBrowser/CARD_CLICKED';
+const EXPAND_CARD = 'courseBrowser/EXPAND_CARD';
+const COLLAPSE_CARD = 'courseBrowser/COLLAPSE_CARD';
 const OPEN_HELP = 'courseBrowser/OPEN_HELP';
 const CLOSE_HELP = 'courseBrowser/CLOSE_HELP';
 const UPDATE_FILTER = 'courseBrowser/UPDATE_FILTER';
@@ -21,6 +23,18 @@ export const courseBrowser = {
   cardClicked: (cardID) => (
     {
       type: CARD_CLICKED,
+      cardID: cardID
+    }
+  ),
+  expandCard: (cardID) => (
+    {
+      type: EXPAND_CARD,
+      cardID: cardID
+    }
+  ),
+  collapseCard: (cardID) => (
+    {
+      type: COLLAPSE_CARD,
       cardID: cardID
     }
   ),
@@ -66,6 +80,38 @@ const courseBrowserReducer = (state = initialState, action) => {
       return Object.assign({},state,{
         expandedIDs: newExpandedIDs
       });
+      case EXPAND_CARD:
+        path = window.location.pathname;
+        //remove the subject from expanded cards
+        newExpandedIDs = state.expandedIDs;
+        if( !newExpandedIDs[path] ) newExpandedIDs[path] = [];
+        preLength = newExpandedIDs[path].length;
+
+        if( newExpandedIDs[path].length !== 0 ){
+          newExpandedIDs[path] =
+              newExpandedIDs[path].filter((id) => action.cardID !== id);
+        }
+        //add it to expanded cards
+        newExpandedIDs[path].push(action.cardID);
+
+        return Object.assign({},state,{
+          expandedIDs: newExpandedIDs
+        });
+      case COLLAPSE_CARD:
+        path = window.location.pathname;
+        //remove the subject from expanded cards
+        newExpandedIDs = state.expandedIDs;
+        if( !newExpandedIDs[path] ) newExpandedIDs[path] = [];
+        preLength = newExpandedIDs[path].length;
+
+        if( newExpandedIDs[path].length !== 0 ){
+          newExpandedIDs[path] =
+              newExpandedIDs[path].filter((id) => action.cardID !== id);
+        }
+
+        return Object.assign({},state,{
+          expandedIDs: newExpandedIDs
+        });
 
     case OPEN_HELP:
       return Object.assign({},state,{

@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../../style'
+// import style from '../../style'
 import { dataCache } from '../../dataHandling/dataCache'
 import CourseCarousel from './Carousels/CourseCarousel'
 import PrimaryTimeCarousel from './Carousels/PrimaryTimeCarousel'
@@ -59,7 +59,6 @@ class ScheduleStackComponent extends React.Component{
         //Hopefully we already have an active section ID
         activeSectionID = my.stackMap.data[activeCourseID].activeSectionID;
 
-        // console.log(primaryTimesJSON);
         if(activeSectionID){
           //If we do find the active time
           activeTime =
@@ -78,8 +77,14 @@ class ScheduleStackComponent extends React.Component{
               time.primaryTime !== undefined);
         }
 
-        sectionJSONs = activeTime.sectionIDs;
-        sectionIDs = Object.keys(sectionJSONs);
+        if(!activeTime){
+          activeTime = primaryTimesJSON[0];
+        }
+
+        if(activeTime){
+          sectionJSONs = activeTime.sectionIDs;
+          sectionIDs = Object.keys(sectionJSONs);
+        }
         if(!activeSectionID) activeSectionID = sectionIDs[0];
 
       }
@@ -100,7 +105,7 @@ class ScheduleStackComponent extends React.Component{
                                                 )}
           />
 
-          { (activeCourseID) ?
+        { (activeCourseID && activeTime) ?
             <PrimaryTimeCarousel  timesJSON={primaryTimesJSON}
                                   activeTime={activeTime.primaryTime}
                                   afterChange={(e) =>
@@ -110,14 +115,13 @@ class ScheduleStackComponent extends React.Component{
             />
           : null
           }
-          { (sectionJSONs) ?
+          { (sectionJSONs && activeTime) ?
             <SectionCarousel      sectionJSONs={sectionJSONs}
                                   activeSectionID={activeSectionID}
                                   sections={my.sections}
                                   afterChange={(e) =>
                                   my.switchActiveSection(
-                                    activeCourseID,
-                      Object.keys(activeTime.sectionIDs)[e]  )}
+                                    activeCourseID, sectionIDs[e])}
             />
             : null
           }

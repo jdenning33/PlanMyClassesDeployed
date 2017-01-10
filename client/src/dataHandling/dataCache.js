@@ -178,7 +178,7 @@ export const dataCache = {
 
   isDataLoaded: (data, dataIDs) => {
     //no data to load
-    if( !dataIDs ) return false;
+    if( !dataIDs ) return true;
 
     //all data is loaded
     if( !dataIDs.every(dataID => {

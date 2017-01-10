@@ -12,7 +12,8 @@ class SubjectsComponent extends React.Component{
     let my = this.props;
 
     let filteredIDs;
-    if(dataCache.isDataLoaded(my.subjects, my.subjectIDs)){
+    if(Object.keys(my.subjects).length &&
+      dataCache.isDataLoaded(my.subjects, my.subjectIDs)){
       filteredIDs = my.subjectIDs.sort( (id1, id2) => {
         let name1 = my.subjects[id1].name;
         let name2 = my.subjects[id2].name;
@@ -22,7 +23,7 @@ class SubjectsComponent extends React.Component{
         return -1;
       });
     } else {
-      return <div>loading</div>
+      return <div style={{textAlign:'center'}}>loading</div>
     }
 
     if(!filteredIDs.length){
