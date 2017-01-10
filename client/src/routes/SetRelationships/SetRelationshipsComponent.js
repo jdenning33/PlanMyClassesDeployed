@@ -31,7 +31,7 @@ let DesiredCoursesCard = ({courseIDs, courses, stackMap, setRelationship,
       // showExpandableButton={true}
       children={SetButton(setRelationship, toggleSetRelationship)}
     />
-
+   <br />
    <CardText style={style.wrapper} expandable={false}>
       {courses? stackMap.relationships.map( (relationship, index) => (
         <Chip labelStyle={style.chipLabel} style={style.chip} key={index}>
@@ -77,14 +77,6 @@ const SetRelationshipComponent = ( {
                           title={'Set Relationships'}
                           helpText={'Set Relationships - a relationship signifies that you will take one or the other of these courses. For example, if I had to take CS 151 or ECE 131 I would create a relationship with them. To make a relationship click the "Set a Relationship" button at the bottom of the card, then click the "link" icon of any classes you want in the relationship, when you are done click "save relationship" and move on to the schedule builder'}/>
       <br />
-        {/* <span style={{width:'100%', maxWidth:'500px', position:'fixed', top:'150px'}}>
-          <RaisedButton style={
-              {float:'right', marginRight:'20px'}}
-            secondary={true}
-            label={!setRelationship?
-              "New " : "Save"}
-            onTouchTap={() => toggleSetRelationship()} />
-          </span> */}
       <div>
         <DesiredCoursesCard courseIDs={courseIDs}
                             setRelationship={setRelationship}

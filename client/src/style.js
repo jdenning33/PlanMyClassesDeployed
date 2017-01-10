@@ -39,6 +39,7 @@ const style = {
     width:'100%',
   },
   chip: {
+    float: 'right',
     margin: '0 4px',
   },
   chipLabel: {
@@ -46,6 +47,7 @@ const style = {
   },
   wrapper: {
     display: 'flex',
+    width: '100%',
     padding: '0 16px',
     flexWrap: 'wrap',
   },
