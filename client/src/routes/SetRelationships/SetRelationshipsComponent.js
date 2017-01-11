@@ -2,7 +2,6 @@ import React from 'react'
 import BottomNavigationContainer from '../../domains/Navigation/BottomNavigationContainer'
 import AppBarComponent from '../../domains/Navigation/AppBarComponent'
 import CoursesContainer from '../../domains/Course/CoursesContainer'
-import { ROUTE_ENUM } from '../../routes/AppRouter';
 
 import style from '../../style'
 

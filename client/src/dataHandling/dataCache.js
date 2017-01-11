@@ -10,7 +10,8 @@
 import dataAPI from '../apis/dataAPI'
 
 //  CONSTANTS
-const dataURL = 'https://planmyclasses2.herokuapp.com/api';
+const dataURL = 'http://localhost:3001/api';
+// const dataURL = 'https://planmyclasses2.herokuapp.com/api';
 export const COLLECTIONS_ENUM = {
   SUBJECTS:     { key:1, url:`${dataURL}/subjects`    , name:'subjects'    },
   COURSES:      { key:2, url:`${dataURL}/courses`     , name:'courses'     },

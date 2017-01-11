@@ -5,7 +5,6 @@ import style from '../../style'
 
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import IconButton from 'material-ui/IconButton'
 import AddCircle from 'material-ui/svg-icons/content/add-circle-outline';
 import RemoveCircle from 'material-ui/svg-icons/content/remove-circle-outline';
 

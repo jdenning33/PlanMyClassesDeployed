@@ -3,6 +3,9 @@ import HomeComponent    from './HomeComponent'
 import { setRoute }     from '../AppRouter'
 import dataAPI, { COLLECTIONS_ENUM }  from '../../apis/dataAPI'
 import { dbCommitJsonModel } from '../../dataHandling/dbCommitJsonModel'
+import buildUnmJsonModel from '../../dataHandling/buildUnmJsonModel'
+import collapseUnmJsonModel from '../../dataHandling/collapseUnmJsonModel'
+import commitUnmJsonToDb from '../../dataHandling/commitUnmJsonToDb'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -24,14 +27,16 @@ const mapDispatchToProps = (dispatch) => {
     populateDB: () => {
       dbCommitJsonModel();
     },
-    addSubject: () => {
-      dataAPI.add(
-        { type: COLLECTIONS_ENUM.SUBJECTS,
-          data: { code: 'ECE',
-                  name: 'Electrical and Computer Engineering'}
-        })
-        .then(  (val) => console.log( val) )
-        .catch( (err) => console.log(err) );
+    buildUnmJsonModel: () => {
+      buildUnmJsonModel()
+      .then(( json) => {
+        console.log(json);
+        console.log(collapseUnmJsonModel(json));
+      })
+      .catch( (err) => console.log(err) );
+    },
+    populateCollapsedModel: () => {
+      commitUnmJsonToDb();
     }
   }
 }
