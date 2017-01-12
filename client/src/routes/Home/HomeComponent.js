@@ -4,8 +4,8 @@ import { ROUTE_ENUM } from '../AppRouter'
 import RaisedButton from 'material-ui/RaisedButton';
 import BottomNavigationContainer from '../../domains/Navigation/BottomNavigationContainer'
 
-
-const HomeComponent = ( { todos, changeRoute, addSubject, eraseDB, populateDB } ) => (
+const HomeComponent = ( { todos, changeRoute, eraseDB, populateDB,
+                        buildUnmJsonModel, populateCollapsedModel} ) => (
   <div>
       <h1> Plan My Classes </h1>
       <h2> What would you like to do? </h2>
@@ -23,8 +23,11 @@ const HomeComponent = ( { todos, changeRoute, addSubject, eraseDB, populateDB } 
       <LinkContainer text='Populate the DataBase'
                 clickAction={() => populateDB()} />
       <br />
-      <LinkContainer text='Test add subject'
-                clickAction={() => addSubject()} />
+      <LinkContainer text='Build JSON Model'
+                clickAction={() => buildUnmJsonModel()} />
+      <br />
+      <LinkContainer text='Populate Collapsed Model'
+                clickAction={() => populateCollapsedModel()} />
       <br />
       <BottomNavigationContainer />
   </div>

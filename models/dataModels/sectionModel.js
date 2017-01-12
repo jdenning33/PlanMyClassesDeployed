@@ -8,6 +8,8 @@ var SectionSchema = new Schema({
   courseID: mongoose.Schema.Types.ObjectId,           // ECE 131 -> 001923412
   number: String,               // 004
   crn:    Number,
+  semester: String,
+  campus: String,
   instructors:  [ { name:   { first : String,
                               last  : String
                             },

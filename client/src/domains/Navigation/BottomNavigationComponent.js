@@ -21,7 +21,7 @@ const BottomNavigationComponent = ({fixed=true, changeRoute}) => {
   let path = window.location.pathname;
 
   let index = -1;
-  if(path === '/') index = -1;
+  if(path === '/') index = 0;
   if(path === '/schedule-builder') index = 2;
   if(path === '/set-relationships') index = 1;
   if(path === '/course-browser') index = 0;

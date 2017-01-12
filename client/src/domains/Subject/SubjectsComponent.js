@@ -4,7 +4,7 @@ import { dataCache } from '../../dataHandling/dataCache'
 
 
 class SubjectsComponent extends React.Component{
-  constructor( {subjects, subjectIDs} ){
+  constructor( {subjects, subjectIDs, activeCampusi, activeSemester} ){
     super();
   }
 
@@ -14,7 +14,17 @@ class SubjectsComponent extends React.Component{
     let filteredIDs;
     if(Object.keys(my.subjects).length &&
       dataCache.isDataLoaded(my.subjects, my.subjectIDs)){
-      filteredIDs = my.subjectIDs.sort( (id1, id2) => {
+      filteredIDs = my.subjectIDs
+      .filter( (id) => {
+        return(
+          my.subjects[id].campusi.some( (campus) => (
+            my.activeCampusi.some( (activeCampus) => campus === activeCampus.code)
+          ))
+          &&
+          my.subjects[id].semesters.some( (semester) => semester === my.activeSemester.code)
+        )
+      })
+      .sort( (id1, id2) => {
         let name1 = my.subjects[id1].name;
         let name2 = my.subjects[id2].name;
 

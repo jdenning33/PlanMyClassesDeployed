@@ -1,15 +1,24 @@
 //  CONSTANTS
 export const SEMESTER_ENUM = {
-  F2016: { key:0, name:'Fall-2016'    },
-  S2017: { key:1, name:'Spring-2017'  },
-  F2017: { key:2, name:'Fall-2017'    }
+  F2016: { key:0, code:'201680', name:'F2016'    },
+  S2017: { key:1, code:'201710', name:'S2017'    },
+  F2017: { key:2, code:'201680', name:'F2017'    }
 }
 
 export const CAMPUS_ENUM = {
-  UNM_ABQ:    { key:0,  name:'ABQ Main',  code:'ABQ'    },
-  UNM_NORTH:  { key:1,  name:'ABQ North', code:'NORTH'  },
-  UNM_WEST:   { key:2,  name:'ABQ West',  code:'WEST'   }
+  UNM_ABQ:  { key:0,  name:'ABQ'        ,   code:'ABQ'  },
+  UNM_EA:   { key:1,  name:'Online'     ,   code:'EA'   },
+  UNM_EF:   { key:3,  name:'San Juan'   ,   code:'EF'   },
+  UNM_EG:   { key:4,  name:'Gallup Grad',   code:'EG'   },
+  UNM_EW:   { key:5,  name:'Westside'   ,   code:'EW'   },
+  UNM_GA:   { key:6,  name:'Gallup'     ,   code:'GA'   },
+  UNM_LA:   { key:7,  name:'Los Alamos' ,   code:'LA'   },
+  UNM_TA:   { key:8,  name:'Taos'       ,   code:'TA'   },
+  UNM_TAM:  { key:9,  name:'Taos/Mora'  ,   code:'TAM'  },
+  UNM_TAQ:  { key:10, name:'Taos/Questa',   code:'TAQ'  },
+  UNM_VA:   { key:11, name:'Valencia'   ,   code:'VA'   }
 }
+
 
 export const DESIRE_ENUM = {
   ENCOURAGED:   { key:0, name:'Encouraged'  },

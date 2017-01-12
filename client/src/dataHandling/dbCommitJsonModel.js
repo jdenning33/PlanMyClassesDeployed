@@ -103,7 +103,7 @@ const handleSubjects = (school) => new Promise(
 
   let promises = [];
   let subjectIDs = [];
-
+  console.log(school);
   if(Object.keys(school.subjects).length === 0) resolve(); //there are no subjects
 
   //Iterate through each subject
@@ -169,7 +169,7 @@ export const dbCommitJsonModel = (jsonModel) => new Promise(
   buildUnmJsonModel()
   .then((jsonModel) => new Promise( (resolve, reject) => {
     console.log(jsonModel);
-    let school = jsonModel['ABQ'];
+    let school = jsonModel['201680'].campusi['ABQ'];
     handleSubjects(school)
     .then( () => {
       console.log('finished');

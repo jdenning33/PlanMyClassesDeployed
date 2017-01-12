@@ -2,6 +2,7 @@ import axios from 'axios';
 
 // TODO: look into using dot-env store url in .env
 const dataURL = 'https://planmyclasses2.herokuapp.com/api';
+// const dataURL = 'http://localhost:3001/api';
 export const COLLECTIONS_ENUM = {
   SUBJECTS:     { key:1, url:`${dataURL}/subjects`    },
   COURSES:      { key:2, url:`${dataURL}/courses`     },

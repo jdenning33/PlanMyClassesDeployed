@@ -7,6 +7,8 @@ var Schema = mongoose.Schema;
 var SubjectSchema = new Schema({
   name: String,     //Electrical and Computer Engineering
   code: String,     //ECE
+  semesters: [ String ],
+  campusi: [ String ],
   courseIDs: [ mongoose.Schema.Types.ObjectId ]
 });
 

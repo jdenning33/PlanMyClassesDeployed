@@ -29,6 +29,8 @@ const store = createStore(
   applyMiddleware( reduxThunk )
 );
 
+window.store = store;
+
 //  where to render. Attaches to html <div id='root'>
 const MOUNT_NODE = document.getElementById('root');
 
