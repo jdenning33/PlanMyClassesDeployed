@@ -164,7 +164,7 @@ const handleCampus = ( semester ) => {
 //                                              /api/F2017/subjects
 // only working with current semester
 const handleSemester = ( xmlDoc ) => {
-  let semesters = {};
+  let semesterJson = {};
 
   $(xmlDoc).find('semester')
   .filter( (index, semester) => {
@@ -172,30 +172,49 @@ const handleSemester = ( xmlDoc ) => {
   })
   .each( (index, semester) => {
     let campusi = handleCampus(semester);
-    let code = $(semester).attr('code');
-    semesters[code] = {
+    // let code = $(semester).attr('code');
+    semesterJson = {
       code: $(semester).attr('code'),
       name: $(semester).attr('name'),
       campusi: campusi
     }
   });
 
-  return semesters;
+  return semesterJson;
 };
 
 //  loads the raw xml unm file then parses it to our json object that we'll
 //  use to populate the unm data db
 const buildUnmJsonModel = () => new Promise( (resolve, reject) => {
-  axios.get('https://gist.githubusercontent.com/jdenning33/b7f33f04d96fe8012016f98bf231fc12/raw/d9d30cd28d246e8cf097dae79708f364334222b1/current.xml')
+  let jsonSchedule = {};
+  let promises = [];
+  promises.push(
+    axios.get('https://gist.githubusercontent.com/jdenning33/b7f33f04d96fe8012016f98bf231fc12/raw/d9d30cd28d246e8cf097dae79708f364334222b1/current.xml')
     .then( res => {
 
       var xmlDoc = res.data;
-      let jsonSchedules = handleSemester( xmlDoc );
-      resolve(jsonSchedules);
+      let semester = handleSemester( xmlDoc );
+      jsonSchedule[semester.code] = semester;
     })
     .catch( err => {
       reject(err);
-    });
+    })
+  );
+  promises.push(
+    axios.get('https://gist.githubusercontent.com/jdenning33/9f31c123bf45536a65b9ebcb94ba924d/raw/5d550b425ef08934488d7fc4110c6a3c2677aeb7/next1.xml')
+    .then( res => {
+
+      var xmlDoc = res.data;
+      let semester = handleSemester( xmlDoc );
+      jsonSchedule[semester.code] = semester;
+    })
+    .catch( err => {
+      reject(err);
+    })
+  );
+
+  Promise.all(promises)
+  .then(() => resolve(jsonSchedule));
 });
 
 export default buildUnmJsonModel;

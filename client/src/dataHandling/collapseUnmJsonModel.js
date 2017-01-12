@@ -23,7 +23,14 @@ const handleCourses = (subjectModel, campusModel) => {
     let oldCourseModel = campusModel.subjects[subjectModel.code].courses[courseKey];
 
     if(subjectModel.courses[courseKey]){
-      subjectModel.courses[courseKey].campusi.push(campusModel.code);
+      if(!subjectModel.courses[courseKey].campusi.some(campus =>
+        campus === campusModel.code)){
+        subjectModel.courses[courseKey].campusi.push(campusModel.code);
+      }
+      if(!subjectModel.courses[courseKey].semesters.some(semester =>
+        semester === campusModel.semester)){
+        subjectModel.courses[courseKey].semesters.push(campusModel.semester);
+      }
     }else{
       subjectModel.courses[courseKey] = { title: oldCourseModel.title,
                                           number: oldCourseModel.number,
@@ -46,7 +53,14 @@ const handleSubjects = (unmModel, campusModel) => {
     let oldSubjectModel = campusModel.subjects[subjectKey];
 
     if(unmModel.subjects[subjectKey]){
-      unmModel.subjects[subjectKey].campusi.push(campusModel.code);
+      if(!unmModel.subjects[subjectKey].campusi.some(campus =>
+        campus === campusModel.code)){
+        unmModel.subjects[subjectKey].campusi.push(campusModel.code);
+      }
+      if(!unmModel.subjects[subjectKey].semesters.some(semester =>
+        semester === campusModel.semester)){
+        unmModel.subjects[subjectKey].semesters.push(campusModel.semester);
+      }
     }else{
       unmModel.subjects[subjectKey] = {  name: oldSubjectModel.name,
                                           code: oldSubjectModel.code,
@@ -76,8 +90,14 @@ const collapseUnmJsonModel = (jsonModel) => {
     newModel.semesters.push(semesterKey);
 
     Object.keys(oldSemesterModel.campusi).forEach( (campusKey) => {
-      newModel.campusi.push(campusKey);
-      handleSubjects(newModel, oldSemesterModel.campusi[campusKey]);
+      let campusModel = oldSemesterModel.campusi[campusKey];
+
+      if(!newModel.campusi.some(campus =>
+        campus === campusModel.code)){
+          newModel.campusi.push(campusKey);
+      }
+
+      handleSubjects(newModel, campusModel);
     });
 
     // newModel.semesters[semesterKey] = newSemesterModel;

@@ -23,6 +23,8 @@ const mapStateToProps = (state, ownProps) => {
     setRelationship: ownProps.setRelationship,
     toggleSetRelationship: ownProps.toggleSetRelationship,
     stagedRelationship: state.scheduleBuilderReducer.newRelationship,
+    activeCampusi: state.schedPrefReducer.campus,
+    activeSemester: state.schedPrefReducer.semester
   }
 }
 

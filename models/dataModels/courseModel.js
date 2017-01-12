@@ -10,6 +10,8 @@ var CourseSchema = new Schema({
   number: String,         // 206L
   description: String,  // An introductory course into ...
   credits: [ Number ],      // [ 3 , 4 ]
+  semesters: [ String ],
+  campusi: [ String ],
   sectionIDs: [ mongoose.Schema.Types.ObjectId ]  // [ 1200001231312, 010233231123 ]
 });
 

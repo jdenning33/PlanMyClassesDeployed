@@ -16,6 +16,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     sections: mySections,
     sectionIDs: sectionIDs,
+    activeCampusi: state.schedPrefReducer.campus,
+    activeSemester: state.schedPrefReducer.semester
   }
 }
 

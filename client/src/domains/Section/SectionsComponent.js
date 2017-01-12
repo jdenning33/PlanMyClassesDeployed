@@ -7,15 +7,24 @@ const stripAndParse = (str) => {
 };
 
 class SectionsComponent extends React.Component{
-  constructor( {sections, sectionIDs} ){
+  constructor( {sections, sectionIDs, activeCampusi, activeSemester} ){
     super();
   }
 
   render(){
     let my = this.props;
+    let filteredIDs = my.sectionIDs;
 
     if(Object.keys(my.sections).length === my.sectionIDs.length){
-      my.sectionIDs.sort( (id1, id2) => {
+      filteredIDs = filteredIDs
+      .filter( (id) => {
+        return(
+          my.activeCampusi.some( (activeCampus) => my.sections[id].campus === activeCampus.code)
+          &&
+          my.sections[id].semester === my.activeSemester.code
+        )
+      })
+      .sort( (id1, id2) => {
         if(!my.sections[id1] || !my.sections[id2]) return 0;
         else {
           return stripAndParse(my.sections[id1].number) -
@@ -26,7 +35,7 @@ class SectionsComponent extends React.Component{
 
     return(
       <span>
-        {my.sectionIDs.map( (sectionID) => (
+        {filteredIDs.map( (sectionID) => (
             <span key={sectionID}>
               <SectionContainer  sectionID={sectionID} />
             </span>

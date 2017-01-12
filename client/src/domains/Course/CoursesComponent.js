@@ -32,7 +32,7 @@ const stripAndParse = (str) => {
 
 class CoursesComponent extends React.Component{
   constructor( {courses, courseIDs, setRelationship = false,
-                  stagedRelationship,
+                  stagedRelationship, activeCampusi, activeSemester,
                   breakFromRelationship, stageNewRelationship, loadCourses} ){
     super();
   }
@@ -52,7 +52,17 @@ class CoursesComponent extends React.Component{
 
     if(!ready) return <div style={{textAlign:'center'}}>loading</div>
 
-    my.courseIDs.sort( (id1, id2) => {
+    let filteredIDs = my.courseIDs
+    .filter( (id) => {
+      return(
+        my.courses[id].campusi.some( (campus) => (
+          my.activeCampusi.some( (activeCampus) => campus === activeCampus.code)
+        ))
+        &&
+        my.courses[id].semesters.some( (semester) => semester === my.activeSemester.code)
+      )
+    })
+    .sort( (id1, id2) => {
       if(!my.courses[id1] && !my.courses[id2]) return 0;
       if(!my.courses[id1] &&  my.courses[id2]) return 1;
       if(my.courses[id1]  && !my.courses[id2]) return -1;
@@ -64,9 +74,7 @@ class CoursesComponent extends React.Component{
     if(my.setRelationship){
       return(
         <div>
-          {/* {(my.courses[my.courseIDs[0]]) ?
-            <CourseContainer courseID={my.courseIDs[0]} /> : null} */}
-          {my.courseIDs.map(courseID => {
+          {filteredIDs.map(courseID => {
             let staged = my.stagedRelationship.some(id => id===courseID);
             return(
               // (courseID === my.courseIDs[0]) ? null :
@@ -74,7 +82,7 @@ class CoursesComponent extends React.Component{
                   <CourseContainer courseID={courseID} ready={ready} />
                   <span style={style.orIcon}>
                     <OrIcon staged={staged}
-                      onTouchTap={()=>my.stageNewRelationship(my.courseIDs)} />
+                      onTouchTap={()=>my.stageNewRelationship(filteredIDs)} />
                     {(my.courseIDs.length > 1) ?
                       <BreakIcon staged={staged}
                         onTouchTap={()=>my.breakFromRelationship(courseID)} />
@@ -91,7 +99,7 @@ class CoursesComponent extends React.Component{
 
     return(
       <span>
-        {my.courseIDs.map( (courseID) => {
+        {filteredIDs.map( (courseID) => {
           if(!my.courses[courseID]) return <div key={courseID}>loading</div>
 
           return (
